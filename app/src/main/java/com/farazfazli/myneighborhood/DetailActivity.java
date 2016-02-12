@@ -12,8 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.InputStream;
+import java.util.Random;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -35,6 +37,8 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
+        TextView mDetailsTextView = (TextView) findViewById(R.id.details);
+
         position = getIntent().getExtras().getInt("position", -9); // get position
         position++;
 
@@ -55,6 +59,8 @@ public class DetailActivity extends AppCompatActivity {
                         fab.setAlpha(1f); // change transparency to 0% transparent
                         fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_black_24dp));
                     }
+                    Random random = new Random();
+                    mDetailsTextView.setText(mPlace + "\n" + mCity + ", " + mState + "\n" + (random.nextInt(15) + 2) + " blocks away");
                     // set imageview to image from the internet
                     new DownloadImageTask((ImageView) findViewById(R.id.background))
                             .execute(cursor.getString(cursor.getColumnIndex("image")));
