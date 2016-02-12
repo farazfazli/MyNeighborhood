@@ -4,6 +4,7 @@ package com.farazfazli.myneighborhood;
  * Created by faraz on 2/11/16.
  */
 public class NeighborhoodItem {
+    // TODO JSON -> this Java Object
     private String mTitle;
     private String mMedia;
 
