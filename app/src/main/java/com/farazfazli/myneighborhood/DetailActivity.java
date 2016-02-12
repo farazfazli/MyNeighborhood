@@ -50,8 +50,10 @@ public class DetailActivity extends AppCompatActivity {
                     mStarred = cursor.getString(cursor.getColumnIndex("favorite"));
                     if (mStarred.equals("NOTSTARRED")) { // if unstarred
                         fab.setAlpha(.5f); // change transparency to 50% transparent
+                        fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_border_black_24dp));
                     } else { // if starred
                         fab.setAlpha(1f); // change transparency to 0% transparent
+                        fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_black_24dp));
                     }
                     // set imageview to image from the internet
                     new DownloadImageTask((ImageView) findViewById(R.id.background))
@@ -70,12 +72,14 @@ public class DetailActivity extends AppCompatActivity {
                 if(mStarred.equals("NOTSTARRED")) {
                     mHelper.modifyFavorite(position, true);
                     fab.setAlpha(1f);
+                    fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_black_24dp));
                     mStarred = "STARRED";
                     Snackbar.make(view, "Starred " + mPlace + "!", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 } else {
                     mHelper.modifyFavorite(position, false);
                     fab.setAlpha(.5f);
+                    fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_border_black_24dp));
                     mStarred = "NOTSTARRED";
                     Snackbar.make(view, "Unstarred " + mPlace + " from favorites!", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
