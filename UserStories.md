@@ -1,0 +1,9 @@
+- As a user I can favorite things
+- As a user I can search for places nearby
+- As a user I can live search
+- As a user I can clear the search bar
+- As a user I can toggle between viewing all places nearby and only favorites
+- As a user I can differenciate between favorited and unfavorited places
+- As a user I can see how far away the place nearby is
+- As a user I can view a picture of the place nearby in my main screen
+- As a user I can view an enlarged version of the place nearby in the details screen
