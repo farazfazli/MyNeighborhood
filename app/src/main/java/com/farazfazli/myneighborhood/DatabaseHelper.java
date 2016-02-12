@@ -23,7 +23,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "place TEXT UNIQUE, " +
             "city TEXT, " +
             "state TEXT, " +
-            "image TEXT UNIQUE)";
+            "image TEXT UNIQUE" +
+            "favorite TEXT)";
 
     private static final String ADD_DATA = "" +
             "INSERT INTO neighborhood VALUES" +
@@ -63,6 +64,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         SQLiteStatement sqLiteStatement = db.compileStatement(CREATE_ENTRIES);
         sqLiteStatement.execute();
+        insertData(db);
     }
 
     @Override
@@ -72,8 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertData() {
-        SQLiteDatabase db = getWritableDatabase();
+    public void insertData(SQLiteDatabase db) {
         /*
             This is my favorite method. Here I am using a "prepared" statement
             so that I can execute multiple inserts with improved performance &

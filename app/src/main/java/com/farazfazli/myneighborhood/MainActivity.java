@@ -2,6 +2,7 @@ package com.farazfazli.myneighborhood;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,14 +21,8 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
         helper = DatabaseHelper.getInstance(this);
 
         mPlacesListView = (ListView) findViewById(R.id.placesListView);
-
-        helper.insertData();
 
         Cursor cursor = helper.getAllRows();
 
@@ -75,7 +68,9 @@ public class MainActivity extends AppCompatActivity {
         mPlacesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, position + "", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
             }
         });
     }
@@ -130,46 +125,5 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
         }
-    }
-
-    public class getData extends AsyncTask<String, String, String> {
-
-        HttpURLConnection urlConnection;
-
-        @Override
-        protected String doInBackground(String... args) {
-
-            StringBuilder result = new StringBuilder();
-
-            try {
-                URL url = new URL("https://api.github.com/users/dmnugent80/repos");
-                urlConnection = (HttpURLConnection) url.openConnection();
-                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    result.append(line);
-                }
-
-            }catch( Exception e) {
-                e.printStackTrace();
-            }
-            finally {
-                urlConnection.disconnect();
-            }
-
-
-            return result.toString();
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-
-            //Do something with the JSON string
-
-        }
-
     }
 }

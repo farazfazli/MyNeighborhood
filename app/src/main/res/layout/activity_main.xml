@@ -13,5 +13,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/placesListView"/>
+        android:id="@+id/placesListView"
+        android:divider="@android:color/holo_blue_light"
+        android:dividerHeight=".1dp"/>
 </RelativeLayout>
